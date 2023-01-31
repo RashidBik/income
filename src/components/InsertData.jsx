@@ -13,7 +13,6 @@ function InsertData() {
   const [date, setDate] = useState(new Date());
   const [selectOpt, setSelectOpt] = useState('Select');
   const [toggleOpt, setToggleOpt] = useState(false);
-  // const [display, setDisplay] = useState('flex');
   const [visible, setVisible] = useState(false);
 
   const userid = localStorage.getItem('userid')
@@ -48,14 +47,18 @@ function InsertData() {
   return (
     <>
       <header style={color.C1} className='flex justify-end p-4'> 
-        <Link to="/home" className='px-2 font-bold'>back</Link>
+        <Link to="/home" className='px-2 font-bold'>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
+          </svg>
+        </Link>
     </header>
     <div style={color.C3} className='flex flex-col p-3 h-full'>
       <form style={color.C1} className='flex flex-col rounded-xl p-4 ' onSubmit={handlSubmit}>
         <div className='text-center text-xl p-3'>Insert Your Data</div>
         <div className=''>
         <div className="px-6 py-4 text-xl ">
-          <div className=' flex flex-col justify-evenly items-center p-4 rounded-xl border border-gray-400 '>
+          <div className=' flex flex-col justify-evenly items-center p-4 rounded-xl border border-gray-100 '>
           <label className='p-2 ' htmlFor="amount">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
               <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" />
@@ -72,37 +75,37 @@ function InsertData() {
           </div>
         </div>
         <div className="flex justify-evenly">
-            <input className=' font-bold px-3 p-2 rounded-xl border border-gray-400' 
+            <input className=' font-bold px-3 p-2 rounded-xl border border-gray-100' 
             type="button" 
             value="income" 
             onClick={(e)=> setType(e.target.value)  }/>
-            <input className=' font-bold px-3 p-2 rounded-xl border border-gray-400' 
+            <input className=' font-bold px-3 p-2 rounded-xl border border-gray-100' 
             type="button" 
             value="expens" 
             onClick={(e)=> setType(e.target.value)  }/>
         </div>
         <div className="p-8">
-           <div className='flex flex-col border border-gray-400 rounded-xl space-y-12'>
+           <div className='flex flex-col border border-gray-100 rounded-xl space-y-12'>
             <div className='flex select-none justify-between rounded-xl p-2 px-4  bg-inherit ' 
             onClick={(e)=> setToggleOpt(!toggleOpt)}>
               <p>{selectOpt}</p>
               {toggleOpt ?<p>-</p>:<p>+</p>}
             </div>
             <div 
-            className=' absolute grid-cols-3 p-2 px-4 z-10 rounded-xl bg-[#222]' style={{display: toggleOpt ? 'grid': 'none'}}>
-              <div className='m-1 w-16 h-8 text-center border border-gray-400 rounded-lg  bg-[#000]' onClick={handlClick}>1</div>
-              <div className='m-1 w-16 h-8 text-center border border-gray-400 rounded-lg  bg-[#000]' onClick={handlClick}>2</div>
-              <div className='m-1 w-16 h-8 text-center border border-gray-400 rounded-lg  bg-[#000]' onClick={handlClick}>3</div>
-              <div className='m-1 w-16 h-8 text-center border border-gray-400 rounded-lg  bg-[#000]' onClick={handlClick}>4</div>
+            className=' absolute grid-cols-3 p-2 px-4 z-10 rounded-xl bg-[#222]' style={{display: toggleOpt ? 'grid': 'none', background: color.C1.background}}>
+              <div className='m-1 w-16 h-8 text-center border border-gray-400 rounded-lg ' onClick={handlClick}>food</div>
+              <div className='m-1 w-16 h-8 text-center border border-gray-400 rounded-lg ' onClick={handlClick}>shirt</div>
+              <div className='m-1 w-16 h-8 text-center border border-gray-400 rounded-lg ' onClick={handlClick}>salary</div>
+              <div className='m-1 w-16 h-8 text-center border border-gray-400 rounded-lg ' onClick={handlClick}>home</div>
               <div  className='m-1 w-16 h-8 text-center '>
                 <span onClick={handlNewGroup} style={{display: visible ? 'none': 'flex'  }}>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 00-1.883 2.542l.857 6a2.25 2.25 0 002.227 1.932H19.05a2.25 2.25 0 002.227-1.932l.857-6a2.25 2.25 0 00-1.883-2.542m-16.5 0V6A2.25 2.25 0 016 3.75h3.879a1.5 1.5 0 011.06.44l2.122 2.12a1.5 1.5 0 001.06.44H18A2.25 2.25 0 0120.25 9v.776" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                   </svg>
                 </span>
                 <div style={{display: !visible ? 'none': 'flex'  }} className=' bg-inherit'>
                   <input 
-                  className=' absolute w-32 px-2 h-8 bg-none outline-none '
+                  className=' absolute w-32 px-2 h-8 bg-none outline-none text-gray-900 '
                   type="text" value={group}
                   placeholder="new group"
                   onChange={(e)=> setGroup(e.target.value)} />  
@@ -120,9 +123,9 @@ function InsertData() {
           <p className='px-4 font-bold'>Cash</p>
         </div>
         <div className="px-8 flex justify-center text-lg">
-            <textarea className=' rounded-l-xl p-2 w-full bg-inherit' 
+            <textarea className=' rounded-xl p-2 w-full bg-inherit border border-gray-100' 
             placeholder='Insert your report here' 
-            type="text" name="report" 
+            name="report" 
             onChange={(e)=>setReport(e.target.value)} 
             value={report} />
         </div>
@@ -143,7 +146,7 @@ function InsertData() {
         </div>
         </div>
         <div className='py-8 px-2'>
-          <div className='border border-gray-400 p-3 text-center text-xl font-bold rounded-xl'>
+          <div className='border border-gray-100 p-3 text-center text-xl font-bold rounded-xl'>
             <input type="submit" value="Save" />
           </div>
         </div>

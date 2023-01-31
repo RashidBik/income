@@ -8,9 +8,7 @@ const Time = (props) => {
     const [todaySort, settoDaySort] = useState();
     const {lang} = useContext(authContext);
   useEffect(() => {
-    //   const date = new Date().getMonth()
        props.sortDate(todaySort)
-    //    console.log(date);
   }, [todaySort]);
     
   return (

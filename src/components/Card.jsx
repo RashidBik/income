@@ -20,12 +20,15 @@ const Card = (props) => {
       })
       .catch(err => setError(err));
     }, []);
-    
 
   return (
     <>
       <header style={color.C1} className='flex justify-end p-4'> 
-        <Link to="/group" className='px-2 font-bold'>back</Link>
+        <Link to="/group" className='px-2 font-bold'>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
+          </svg>
+        </Link>
       </header>
       <div className='flex flex-col'>
         <div className='text-center font-bold p-2 text-lg'>2020/10/11</div>
