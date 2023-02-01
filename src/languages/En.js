@@ -12,8 +12,10 @@ export const En = {
     header: ['Search', 'Setting'],
     footer: ['Group','Report','Home'],
     setting: ['Setting', 'Register', 'Login', 'Account', 'Profile', 'Language', 'About', 'Theme'],
-    register: ['Name', 'Job', 'Email', 'Password', 'Register'],
-    login: ['Email', 'Password'],
+    register: ['SIGN UP','Insert Your Name', 'What Is Your Job', 'exapmle@mail.com', 'Insert A Password', 'Register'],
+    login: ['SIGN IN','Enter Your Email', 'Enter Your Password'],
+    theme: ['Select Theme'],
+    // insert: ['Insert Your Data', 'Insert Amount', '']
     ///////TODO............
 
 }

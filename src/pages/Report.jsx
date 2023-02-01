@@ -58,7 +58,7 @@ function Report() {
         </nav>
         <div className='px-3  flex flex-col '>
           <div className='py-1'>
-            <nav style={color.C3} className='flex text-xl rounded-t-full justify-evenly font-bold'>
+            <nav className='flex text-xl justify-evenly font-bold'>
                 <div className='text-green-800'>
                   <p>{lang.reports.calc[0]}</p>
                   <p>{data.assets && data.assets.income}</p>

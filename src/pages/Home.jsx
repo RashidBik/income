@@ -24,19 +24,19 @@ export default function Home() {
     .then(({content, assets}) => {
       setAssets(assets)
       setLoading(false)
+      setChartData({
+        labels: ['income', 'expens'], 
+        datasets: [{data: [assets.income, assets.expens],
+          backgroundColor: [
+            "#78b778",
+            "#f98080"
+          ],
+          borderColor: '#eee',
+          borderWidth: 2
+        }]
+      })
     })
     .catch(err => err);
-    setChartData({
-      labels: ['income', 'expens'], 
-      datasets: [{data: [assets.income, assets.expens],
-        backgroundColor: [
-          "#78b778",
-          "#f98080"
-        ],
-        borderColor: '#eee',
-        borderWidth: 2
-      }]
-    })
   }, []);
 
   return (

@@ -2,11 +2,12 @@ import React from 'react'
 import { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import authContext from '../helper/AuthContext';
+import '../App.css';
 
 const Footer = () => {
   const {lang, color} = useContext(authContext);
   return (
-    <div>
+    <div className='bar'>
         <footer style={color.C1} className='absolute bottom-0 flex justify-around w-full p-4 border-t'>
           <div className=' '>
             <Link to="/group" >

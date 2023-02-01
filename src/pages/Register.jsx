@@ -42,26 +42,26 @@ const Register = () => {
       <div className='flex flex-col justify-center align-middle h-full items-center'>
         <form style={color.C1} className=' bg-inherit border px-4 py-10 rounded-xl' onSubmit={handleSubmit}>
           <div className='text-xl'>
-            SIGN UP
+            {lang.register[0]}
           </div>
         <div className='relative'>
-            <input className='px-3 py-2 mt-4 rounded-xl' placeholder='Insert Your Name' type="text"  
+            <input className='px-3 py-2 mt-4 rounded-xl' placeholder={lang.register[1]} type="text"  
             onChange={(e)=> setName(e.target.value)} value={name} />
         </div>
         <div className='relative'>
-            <input className='px-3 py-2 mt-4 rounded-xl' placeholder='Whats Your Job' type="text" 
+            <input className='px-3 py-2 mt-4 rounded-xl' placeholder={lang.register[2]} type="text" 
             onChange={(e)=> setJob(e.target.value)} value={job} />
         </div>
         <div className='relative'>
-            <input className='px-3 py-2 mt-4 rounded-xl' placeholder='example@gmail.com' type="email" 
+            <input className='px-3 py-2 mt-4 rounded-xl' placeholder={lang.register[3]} type="email" 
             onChange={(e)=> setEmail(e.target.value)} value={email} />
         </div>
         <div className='relative'>
-            <input className='px-3 py-2 mt-4 rounded-xl' placeholder='Insert A Password' type="password" 
+            <input className='px-3 py-2 mt-4 rounded-xl' placeholder={lang.register[4]} type="password" 
             onChange={(e)=> setPassword(e.target.value)} value={password} />
         </div>
         <div className='relative px-5 mt-8 text-center font-bold  border rounded-xl'>
-            <input className='px-3 py-2 rounded-xl' type="submit" value="Register" />
+            <input className='px-3 py-2 rounded-xl' type="submit" value={lang.register[5]} />
         </div>
         <div>{error}</div>
         </form>

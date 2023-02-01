@@ -4,6 +4,7 @@ import {
   Route
 } from "react-router-dom";
 import './App.css';
+import './fonts/BKoodakBold.ttf';
 import Report from './pages/Report';
 import Groups from './pages/Groups';
 import Home from './pages/Home';
@@ -29,13 +30,15 @@ const colorA = {
   C1: {background: "#579BB1", color: '#F8F4EA'},
   C2: {background: "#E1D7C6", color: '#000'},
   C3: {background: "#ECE8DD", color: '#000'},
-  C4: {background: "#F8F4EA", color: '#000'}
+  C4: {background: "#F8F4EA", color: '#000'},
+  C5: {background: 'rgb(2,0,36)',background: 'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%)'}
+
 }
 
 function App() {
   const [auth, setAuth] = useState(false);
   const [admin, setAdmin] = useState(false);
-  const [lang, setLang] = useState(Farsi);
+  const [lang, setLang] = useState(En);
   const [color, setColor] = useState(colorA);
   useEffect(() => {
     const userid = localStorage.getItem('userid');
@@ -65,7 +68,7 @@ function App() {
       setColor}}>
     <Router>
       <div style={color.C4} 
-        className="relative flex flex-col h-[100vh]">
+        className="relative flex flex-col h-[100vh] font-koodak font-mono">
             <Routes>
               <Route path="/register" element={<Register/>} />  
              {

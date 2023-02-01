@@ -37,12 +37,12 @@ const Login = () => {
     </header>
     <div className='flex justify-center items-center px-4 py-10 align-middle h-full '>
        <form style={color.C1} className='flex flex-col p-4 rounded-xl' onSubmit={handleSubmit}>
-        <div>SIGN IN</div>
-        <input className='px-3 py-2 mt-4 rounded-xl' type="email" placeholder='email' 
+        <div>{lang.login[0]}</div>
+        <input className='px-3 py-2 mt-4 rounded-xl' type="email" placeholder={lang.login[1]} 
                value={email} onChange={(e)=> setEmail(e.target.value)} />
-        <input className='px-3 py-2 mt-4 rounded-xl' type="password" placeholder='password' 
+        <input className='px-3 py-2 mt-4 rounded-xl' type="password" placeholder={lang.login[2]} 
                value={password} onChange={(e)=> setPassword(e.target.value)} />
-        <input className='px-3 py-2 mt-4 rounded-xl border' type="submit" value="Login"/> 
+        <input className='px-3 py-2 mt-4 rounded-xl border' type="submit" value={lang.login[0]}/> 
        </form>
     </div>
     </>

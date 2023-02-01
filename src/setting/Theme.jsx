@@ -7,14 +7,18 @@ const colorA = {
   C1: {background: "#579BB1", color: '#F8F4EA'},
   C2: {background: "#E1D7C6", color: '#000'},
   C3: {background: "#ECE8DD", color: '#000'},
-  C4: {background: "#F8F4EA", color: '#000'}
+  C4: {background: "#F8F4EA", color: '#000'},
+  C5: {background: 'rgb(2,0,36)',background: 'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%)'}
+
 }
 const colorB = {
   C1: {background: "#EEB76B", color: '#310B0B'},
   C2: {background: "#E2703A", color: '#9C3D54'},
   C3: {background: "#9C3D54", color: '#E2703A'},
   C4: {background: "#310B0B", color: '#EEB76B'},
-
+  C5: {background: 'rgb(2,0,36)',background: 'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%)'}
+  
+  
 }
 const colorC = {
   C1: {background: "#F2F3F3", color: '#000'},
@@ -31,7 +35,7 @@ const colorD = {
 }
 
 const Theme = () => {
-  const {color, setColor} = useContext(authContext);
+  const {color, setColor, lang} = useContext(authContext);
 
   // const handlTheme = ()=> {
     // setColor(wthem)
@@ -55,12 +59,12 @@ const Theme = () => {
       </header>
       <div className='flex flex-col justify-center align-middle items-center h-full'>
         <div style={color.C1} className='p-4 rounded-xl'>
-        <div className="p-4 text-center text-xl">Select Theme</div>
+        <div className="p-4 text-center text-xl">{lang.theme[0]}</div>
         <div className='flex flex-wrap'>
           <button className=' bg-black h-28 w-16 ' onClick={()=> setColor(colorA)}></button>
           <button className=' bg-white h-28 w-16 ' onClick={()=> setColor(colorB)}></button>         
           <button className=' bg-pink-600 h-28 w-16 ' onClick={()=> setColor(colorC)}></button>
-          <button className=' bg-blue-800 h-28 w-16 ' onClick={()=> setColor(colorD)}></button>
+          <button className=' bg-[rgb(2,0,36)] bg-[linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%)] h-28 w-16 ' onClick={()=> setColor(colorD)}></button>
         </div>
         </div>
       </div>

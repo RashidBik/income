@@ -17,7 +17,7 @@ const changHandler = (e) => {
       <header className='flex justify-between p-4 w-full border-b'>
           <div className=' relative flex'>
             <input 
-              className=' outline-none bg-inherit pl-8 ' 
+              className=' outline-none bg-inherit px-8 w-[60%] ' 
               type="search" 
               placeholder={lang.header[0]} 
               value={keyword} onChange={changHandler} 
