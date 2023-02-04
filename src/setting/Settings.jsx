@@ -8,8 +8,8 @@ const Settings = () => {
   const {lang, admin, color } = useContext(authContext);
    
   return (
-    <div className='grid'>
-      <div style={color.C1} className='p-4 text-center'>{lang.setting[0]}</div>
+    <div className='grid md:h-full '>
+      <div style={color.C1} className='p-4 text-center md:hidden'>{lang.setting[0]}</div>
       <div style={color.C1} onClick={()=> navigate('/register')} className="p-4 mt-1 flex">
         <span>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">

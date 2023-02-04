@@ -23,7 +23,7 @@ function InsertData() {
 
     const handlSubmit = async (e)=> {
       e.preventDefault();
-      const response = await fetch(`http://localhost:4000/api/user/content/${userid}`,{
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/user/content/${userid}`,{
           method: "POST",
             body: JSON.stringify(data),
             headers: {
@@ -46,14 +46,14 @@ function InsertData() {
 
   return (
     <>
-      <header style={color.C1} className='flex justify-end p-4'> 
+      <header style={color.C1} className='flex justify-end p-4 '> 
         <Link to="/home" className='px-2 font-bold'>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
           </svg>
         </Link>
     </header>
-    <div style={color.C3} className='flex flex-col p-3 h-full'>
+    <div style={color.C1} className='flex flex-col p-3 h-full md:w-full'>
       <form style={color.C1} className='flex flex-col rounded-xl p-4 ' onSubmit={handlSubmit}>
         <div className='text-center text-xl p-3'>Insert Your Data</div>
         <div className=''>

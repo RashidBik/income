@@ -16,7 +16,7 @@ function Report() {
   const userid = localStorage.getItem('userid');
 
     useEffect(() => {
-      fetch(`http://localhost:4000/api/user/content/${userid}`)
+      fetch(`${process.env.REACT_APP_API_URL}/api/user/content/${userid}`)
       .then((res)=> res.json())
       .then(data => {
         setData(data)
@@ -48,17 +48,19 @@ function Report() {
         // setContents(selectedData)
     }
   return (
-    <div>
-      <Header searchData={searchData} />
+    <div className='lg:p-40 '>
+      <div className=' md:hidden '>
+      <Header searchData={searchData} error={error}/>
+      </div>
       <span>
       <NewInser/>         
     </span> 
-        <nav style={color.C3} className='py-2'>
+        <nav style={color.C3} className='py-2 lg:min-w-[10em] '>
         <Time sortDate={sortDate} />
         </nav>
         <div className='px-3  flex flex-col '>
           <div className='py-1'>
-            <nav className='flex text-xl justify-evenly font-bold'>
+            <nav className='flex text-xl justify-evenly font-bold lg:min-w-[10em]'>
                 <div className='text-green-800'>
                   <p>{lang.reports.calc[0]}</p>
                   <p>{data.assets && data.assets.income}</p>
@@ -76,7 +78,7 @@ function Report() {
               {contents && contents.map(item => (
                   <div key={item._id} className='flex flex-col'>
                       <div onClick={()=> navigate('/card',{state: item._id})} 
-                        className='grid grid-cols-3 rounded-xl justify-around m-2 px-2 py-3 text-xl ' 
+                        className='grid grid-cols-3 rounded-xl justify-around m-2 px-2 py-3 text-xl lg:min-w-[10em] ' 
                         style={item.type === "income" ? color.C3 : color.C2}>
                           <span style={{color: item.type === "income" ? "green":"red"}} className='p-1'>{item.amount}</span>
                           <span style={{color: item.type === "income" ? "green":"red"}} className='p-1'>{item.deal}</span>

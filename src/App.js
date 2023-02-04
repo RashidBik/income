@@ -25,6 +25,9 @@ import authContext from "./helper/AuthContext";
 import {Farsi} from './languages/Farsi';
 import {En} from './languages/En';
 import Lang from "./components/Lang";
+import About from "./setting/About";
+import Pages from "./pages/Pages";
+import Header from "./components/Header";
 
 const colorA = {
   C1: {background: "#579BB1", color: '#F8F4EA'},
@@ -47,12 +50,12 @@ function App() {
     } else {
       setAuth(false)
     }
-    // const accessToken = localStorage.getItem('accessToken');
-    // if (accessToken) {
-    //   setAdmin(true)
-    // } else {
-    //   setAdmin(false)
-    // }
+    const accessToken = localStorage.getItem('accessToken');
+    if (accessToken) {
+      setAdmin(true)
+    } else {
+      setAdmin(false)
+    }
   }, []);
   
   return (
@@ -67,14 +70,20 @@ function App() {
       color, 
       setColor}}>
     <Router>
+      <div className=" hidden md:grid">
+        <Header />
+      </div>
       <div style={color.C4} 
-        className="relative flex flex-col h-[100vh] font-koodak font-mono">
+        className="relative md:hidden flex flex-col md:flex-wrap-reverse h-[100vh] font-koodak font-mono">
+          
             <Routes>
               <Route path="/register" element={<Register/>} />  
              {
               auth ? (
                <>
+                <Route path="/" element={<Wellcom/>}/>
                 <Route path="/home" element={<Home/>} />
+                <Route path="/about" element={<About/>} />
                 <Route path="/setting" element={<Settings />} />
                 <Route path="/report" element={<Report/>} />
                 <Route path="/group" element={<Groups />} />
@@ -103,9 +112,55 @@ function App() {
              }         
             </Routes>
          {
-          (auth || admin) &&  <Footer/> 
-         }
+           (auth || admin) &&  <div className="md:hidden"><Footer/></div> 
+          }
       </div>
+        <div className="hidden md:flex md:flex-col">
+          <div className=" md:h-[calc(100vh-110px)] flex ">
+            <Settings />
+            <div className="hidden md:flex flex-col overflow-auto w-full max-w-[60vw] ">
+              {/* <Wellcom/> */}
+              <Home/>
+              <Report/>
+              <Groups />
+              <About/>
+            </div>
+              <div className=" md:w-full overflow-auto">
+              <Routes>
+             {
+              auth ? (
+               <>
+                <Route path="/insertData" element={<InsertData /> } />
+                <Route path="/theme" element={<Theme />} />
+                <Route path="/card" element={<Card />} />              
+                <Route path="/contents" element={<Contents/>} />   
+                <Route path="/lang" element={<Lang/> } />   
+                  {
+                    admin ? (
+                    <>
+                      <Route path="/update" element={<Update/>} /> 
+                      <Route path="/profile" element={<Profile />} />
+                      <Route path="/account" element={<Account />} />
+                    </>
+                    ):(
+                      <>
+                      <Route path="/login" element={<Login/>} />          
+                    </>
+                    )
+                  }
+               </>
+              ): (
+                <Route path="/" element={<Wellcom/>}/>
+              )
+             }         
+            </Routes>
+              </div>
+          </div>
+          <div>
+            <Footer/>
+          </div>
+        </div>
+      
     </Router>
     </authContext.Provider>
   );

@@ -1,4 +1,7 @@
+import { useContext } from "react";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import authContext from "../helper/AuthContext";
 
 const Profile = () => {
   const [user, setUser] = useState({});
@@ -7,6 +10,7 @@ const Profile = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [err, setErr] = useState(null);
+  const {color} = useContext(authContext);
 
   const userid = localStorage.getItem('userid')
 
@@ -26,7 +30,7 @@ const Profile = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = {name, job, email, password}
-    fetch(`http://localhost:4000/api/user/${userid}`,{
+    fetch(`${process.env.REACT_APP_API_URL}/api/user/${userid}`,{
       method: "PUT",
       body: JSON.stringify(data),
       headers: {
@@ -41,7 +45,13 @@ const Profile = () => {
 
   return (
     <div>
-      <div className="p-4 bg-slate-300 text-center">Profile</div>
+      <header style={color.C1} className='flex justify-end p-4'> 
+        <Link to="/setting" className='px-2 font-bold'>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
+          </svg>
+        </Link>
+      </header>
       <div className='flex flex-col justify-center items-center h-[30vh]'>
         <div className='border text-center rounded-full w-[100px] h-[100px] bg-orange-300'>picture</div>
         <div className='text-xl '>alt</div>
@@ -64,7 +74,7 @@ const Profile = () => {
               <label className='p-2 ' htmlFor="password">Password</label>
               <input className='' type="password" name="password" value={password} onChange={(e)=> setPassword(e.target.value)}/>
           </div>
-          <input type="submit" value="save" />
+          <input style={color.C1} className="w-full p-2 mt-3" type="submit" value="save" />
         </form>
       </div>
     </div>

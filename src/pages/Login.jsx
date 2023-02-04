@@ -1,30 +1,43 @@
 import axios from 'axios';
 import React, { useContext, useState } from 'react'
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import authContext from '../helper/AuthContext';
 
 const Login = () => {
+  const [isEmpty, setIsEmpty] = useState(true);
+  const [error, setError] = useState(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const {setAdmin, color, lang} = useContext(authContext);
+
+  const userid = localStorage.getItem('userid')
   const navigate = useNavigate()
   const user = {email, password};
 
-  
+  useEffect(() => {
+     if ( email && password) {
+       setIsEmpty(false)
+     }
+   }, [email, password]);
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post(`http://localhost:4000/api/user/login/63d173c9c6fb6e7638a9dd3a`,{data: user})
+    axios.post(`${process.env.REACT_APP_API_URL}/api/user/login/${userid}`,{data: user})
     .then(res => res.data)
     .then(data => {
       localStorage.setItem('accessToken', data)
       setAdmin(true)
-      navigate('/home')
+      navigate('/account')
+      console.log(data);
     })
-    .catch(err => console.log(err));    
+    .catch(err => {
+      setError(err)
+      navigate('/home')
+    });    
 
   }
-
+console.log(error);
 
   return (
     <>
@@ -38,12 +51,13 @@ const Login = () => {
     <div className='flex justify-center items-center px-4 py-10 align-middle h-full '>
        <form style={color.C1} className='flex flex-col p-4 rounded-xl' onSubmit={handleSubmit}>
         <div>{lang.login[0]}</div>
-        <input className='px-3 py-2 mt-4 rounded-xl' type="email" placeholder={lang.login[1]} 
+        <input className='px-3 py-2 mt-4 rounded-xl text-gray-900' type="email" placeholder={lang.login[1]} 
                value={email} onChange={(e)=> setEmail(e.target.value)} />
-        <input className='px-3 py-2 mt-4 rounded-xl' type="password" placeholder={lang.login[2]} 
+        <input className='px-3 py-2 mt-4 rounded-xl text-gray-900' type="password" placeholder={lang.login[2]} 
                value={password} onChange={(e)=> setPassword(e.target.value)} />
-        <input className='px-3 py-2 mt-4 rounded-xl border' type="submit" value={lang.login[0]}/> 
+        <input className={isEmpty ? ' text-red-300 px-3 py-2 rounded-xl border mt-4': 'border mt-4 px-3 py-2 rounded-xl text-green-300'} type="submit" value={lang.login[0]} /> 
        </form>
+       <div>{error}</div>
     </div>
     </>
   )

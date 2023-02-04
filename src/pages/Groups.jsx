@@ -14,7 +14,7 @@ function Groups() {
 const {lang, color} = useContext(authContext);
 
     useEffect(() => {
-      fetch(`http://localhost:4000/api/user/content/${userid}`)
+      fetch(`${process.env.REACT_APP_API_URL}/api/user/content/${userid}`)
       .then((res)=> res.json())
       .then(data => {
        let groups = data.content.map(group => group.group)
@@ -26,9 +26,11 @@ const {lang, color} = useContext(authContext);
  const sortedGroup = Array.from(new Set(group))
   return (
     <>
-    <Header />
+     <div className=' md:hidden'>
+        <Header err={error} />
+      </div>
     <NewInser/>      
-    <div className='flex flex-col'>
+    <div className='flex flex-col lg:p-40'>
       <div style={color.C2} className='flex justify-around p-2'>
         <div 
         className='text-red-900' 

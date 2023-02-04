@@ -1,5 +1,4 @@
 import { useState } from "react";
-import {amount, deal, type} from "../utils/Data";
 import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { useEffect } from "react";
@@ -13,13 +12,15 @@ export default function Home() {
   ChartJS.register(ArcElement, Tooltip, Legend);
   const userid = localStorage.getItem('userid');
   const [assets, setAssets] = useState({});
+  const [error, setError] = useState(null);
   const [chartData, setChartData] = useState();
   const [loading, setLoading] = useState(true); 
   const {lang, color} = useContext(authContext);
   
+  
 
   useEffect(() => {
-    fetch(`http://localhost:4000/api/user/content/${userid}`)
+    fetch(`${process.env.REACT_APP_API_URL}/api/user/content/${userid}`)
     .then((res)=> res.json())
     .then(({content, assets}) => {
       setAssets(assets)
@@ -32,22 +33,27 @@ export default function Home() {
             "#f98080"
           ],
           borderColor: '#eee',
-          borderWidth: 2
+          borderWidth: 2,
         }]
       })
     })
-    .catch(err => err);
+    .catch(err => setError(err));
   }, []);
 
   return (
     <>
-    <Header />
+      <div className=' md:hidden'>
+        <Header />
+      </div>
     <NewInser/>
-    <div className="flex flex-col align-middle items-center justify-evenly h-[100vh] ">
+    <div className="flex flex-col align-middle items-center justify-evenly h-[100vh] md:pt-40 ">
         <div className="px-4 text-center rounded">
           <h1 style={color.C1} className=" py-8 px-2 rounded-xl text-xl font-black ">{lang.home.avatar}</h1>
         </div>
-      <div className="p-12">
+        <div>
+        
+        </div>
+      <div className="">
       {
         loading ? (
           <>
@@ -62,10 +68,10 @@ export default function Home() {
                     title: {
                       display: true,
                       text: "Your Income and Expens"
-              }
-            }
-          }}
-        />
+                  }
+                }
+              }}
+            />
           </>
         )
       }

@@ -12,7 +12,7 @@ const Time = (props) => {
   }, [todaySort]);
     
   return (
-    <div className='flex justify-evenly'>
+    <div className='flex justify-evenly lg:min-w-[10em]'>
         <button onClick={()=> settoDaySort(new Date().getDate())} className=''>{lang.reports.bar[0]}</button>
         <button onClick={()=> settoDaySort(new Date().getMonth())} className=''>{lang.reports.bar[1]}</button>
         <button onClick={()=> settoDaySort(new Date().getFullYear())} className=''>{lang.reports.bar[2]}</button>

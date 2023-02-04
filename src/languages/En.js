@@ -11,7 +11,7 @@ export const En = {
     groups: ['Income', 'Expens'],
     header: ['Search', 'Setting'],
     footer: ['Group','Report','Home'],
-    setting: ['Setting', 'Register', 'Login', 'Account', 'Profile', 'Language', 'About', 'Theme'],
+    setting: ['Setting', 'ٔNew Account', 'Login', 'Account', 'Profile', 'Language', 'About', 'Theme'],
     register: ['SIGN UP','Insert Your Name', 'What Is Your Job', 'exapmle@mail.com', 'Insert A Password', 'Register'],
     login: ['SIGN IN','Enter Your Email', 'Enter Your Password'],
     theme: ['Select Theme'],

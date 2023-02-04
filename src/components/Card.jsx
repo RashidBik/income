@@ -13,7 +13,7 @@ const Card = (props) => {
   const userid = localStorage.getItem('userid');
 
     useEffect(() => {
-      fetch(`http://localhost:4000/api/user/content/${userid}/${location.state}`)
+      fetch(`${process.env.REACT_APP_API_URL}/api/user/content/${userid}/${location.state}`)
       .then((res)=> res.json())
       .then(data => {
         setData(data.content)

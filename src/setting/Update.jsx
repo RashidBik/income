@@ -1,6 +1,9 @@
 import axios from 'axios';
+import { useContext } from 'react';
 import {useState, useEffect} from 'react'
 import { useLocation, useNavigate } from 'react-router'
+import { Link } from 'react-router-dom';
+import authContext from '../helper/AuthContext';
 
 const Update = (props) => {
   // const [data, setData] = useState([]);
@@ -13,6 +16,7 @@ const Update = (props) => {
   const [report, setReport] = useState('');
   const [date, setDate] = useState('');
   const [error, setError] = useState(null);
+  const {color} = useContext(authContext);
   const navigate = useNavigate();
   
   const userid = localStorage.getItem("userid");
@@ -42,7 +46,7 @@ const Update = (props) => {
       // const response = await axios.put(`http://localhost:4000/api/user/content/${userid}/${id}`,{updatedData})
       // const json = await response.data
       // console.log(json);
-      fetch(`http://localhost:4000/api/user/content/${userid}/${id}`,{
+      fetch(`${process.env.REACT_APP_API_URL}/api/user/content/${userid}/${id}`,{
         method: "PUT",
         body: JSON.stringify(updatedData),
         headers: {
@@ -56,11 +60,17 @@ const Update = (props) => {
       }))
       .catch(err => console.log(err))
     }
-  return (
+  return ( 
     <div className='grid'>
-    <div className='bg-gray-300 p-4 text-center'>Account</div>
+          <header style={color.C1} className='flex justify-end p-4'> 
+        <Link to="/setting" className='px-2 font-bold'>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
+          </svg>
+        </Link>
+        </header>
       <form onSubmit={handleSubmit}>
-        <div className='grid'>
+        <div style={color.C4} className='grid'>
             <div className='p-2 m-1 bg-slate-300 '>
               <input type="text" className='p-1' name='group' onChange={(e)=> setDate(e.target.value)} value={date}/>
               {/* <input type="date" name="" id="" hidden /> */}
@@ -95,7 +105,7 @@ const Update = (props) => {
               <label className='px-2' htmlFor="report">Report</label>
              </div>
              <div className='flex p-2 justify-end px-8 '> 
-               <input type="submit" value="save" className='border px-2 rounded' />
+               <input style={color.C1} type="submit" value="save" className='border px-2 rounded-xl w-full py-2' />
              </div>
          </div>
       </form>
