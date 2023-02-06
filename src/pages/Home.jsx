@@ -17,14 +17,11 @@ export default function Home() {
   const [loading, setLoading] = useState(true); 
   const {lang, color} = useContext(authContext);
   
-  
-
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/api/user/content/${userid}`)
     .then((res)=> res.json())
     .then(({content, assets}) => {
       setAssets(assets)
-      setLoading(false)
       setChartData({
         labels: ['income', 'expens'], 
         datasets: [{data: [assets.income, assets.expens],
@@ -36,6 +33,7 @@ export default function Home() {
           borderWidth: 2,
         }]
       })
+      setLoading(false)
     })
     .catch(err => setError(err));
   }, []);
@@ -49,9 +47,6 @@ export default function Home() {
     <div className="flex flex-col align-middle items-center justify-evenly h-[100vh] md:pt-40 ">
         <div className="px-4 text-center rounded">
           <h1 style={color.C1} className=" py-8 px-2 rounded-xl text-xl font-black ">{lang.home.avatar}</h1>
-        </div>
-        <div>
-        
         </div>
       <div className="">
       {

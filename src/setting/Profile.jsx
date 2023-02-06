@@ -1,10 +1,9 @@
-import { useContext } from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState,useContext } from "react";
 import { Link } from "react-router-dom";
+import Back from "../components/Back";
 import authContext from "../helper/AuthContext";
 
 const Profile = () => {
-  const [user, setUser] = useState({});
   const [name, setName] = useState("");
   const [job, setJob] = useState("");
   const [email, setEmail] = useState("");
@@ -15,7 +14,7 @@ const Profile = () => {
   const userid = localStorage.getItem('userid')
 
   useEffect(() => {
-    fetch(`http://localhost:4000/api/user/${userid}`)
+    fetch(`${process.env.REACT_APP_API_URL}/api/user/${userid}`)
     .then(res => res.json())
     .then(result => {
       setName(result.user.name)
@@ -46,11 +45,7 @@ const Profile = () => {
   return (
     <div>
       <header style={color.C1} className='flex justify-end p-4'> 
-        <Link to="/setting" className='px-2 font-bold'>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
-          </svg>
-        </Link>
+        <Back/>
       </header>
       <div className='flex flex-col justify-center items-center h-[30vh]'>
         <div className='border text-center rounded-full w-[100px] h-[100px] bg-orange-300'>picture</div>

@@ -1,7 +1,5 @@
-import { useContext } from 'react';
-import {useEffect ,useState } from 'react';
-import { useLocation, useNavigate } from 'react-router';
-import { Link } from 'react-router-dom';
+import {useEffect ,useState,useContext } from 'react';
+import { useNavigate } from 'react-router';
 import Header from '../components/Header';
 import NewInser from '../components/NewInser';
 import authContext from '../helper/AuthContext';

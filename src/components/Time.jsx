@@ -1,7 +1,5 @@
 import React from 'react'
-import { useContext } from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import {useState,useEffect, useContext } from 'react';
 import authContext from '../helper/AuthContext';
 
 const Time = (props) => {

@@ -1,7 +1,5 @@
-import { useContext } from 'react';
-import { useState, useEffect } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router'
-import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import NewInser from '../components/NewInser';
 import Time from '../components/Time';
@@ -35,7 +33,6 @@ function Report() {
         })
         setContents(searchedData)
       } else {
-        // refreshHandler()
         setContents(data.content)
       }
     }
@@ -44,8 +41,6 @@ function Report() {
         const selectedData = contents.filter(item => {
           return new Date().getMonth(item.date) === choosedDate;
         })
-     
-        // setContents(selectedData)
     }
   return (
     <div className='lg:p-40 '>

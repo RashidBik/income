@@ -1,14 +1,13 @@
-import React from 'react'
 import { useContext } from 'react';
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import Back from '../components/Back';
 import authContext from '../helper/AuthContext';
 const colorA = {
   C1: {background: "#579BB1", color: '#F8F4EA'},
   C2: {background: "#E1D7C6", color: '#000'},
   C3: {background: "#ECE8DD", color: '#000'},
   C4: {background: "#F8F4EA", color: '#000'},
-  C5: {background: 'rgb(2,0,36)',background: 'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%)'}
+  C5: {background: 'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%)'}
 
 }
 const colorB = {
@@ -16,7 +15,7 @@ const colorB = {
   C2: {background: "#E2703A", color: '#9C3D54'},
   C3: {background: "#9C3D54", color: '#E2703A'},
   C4: {background: "#310B0B", color: '#EEB76B'},
-  C5: {background: 'rgb(2,0,36)',background: 'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%)'}
+  C5: {background: 'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%)'}
   
   
 }
@@ -51,11 +50,7 @@ const Theme = () => {
   return (
     <div className='flex flex-col h-full'>
       <header style={color.C1} className='flex justify-end p-4'> 
-        <Link to="/setting" className='px-2 font-bold'>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
-          </svg>
-        </Link>
+        <Back />
       </header>
       <div className='flex flex-col justify-center align-middle items-center h-full'>
         <div style={color.C1} className='p-4 rounded-xl'>

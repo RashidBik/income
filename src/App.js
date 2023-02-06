@@ -34,8 +34,7 @@ const colorA = {
   C2: {background: "#E1D7C6", color: '#000'},
   C3: {background: "#ECE8DD", color: '#000'},
   C4: {background: "#F8F4EA", color: '#000'},
-  C5: {background: 'rgb(2,0,36)',background: 'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%)'}
-
+  C5: {background: 'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%)'}
 }
 
 function App() {
@@ -77,7 +76,8 @@ function App() {
         className="relative md:hidden flex flex-col md:flex-wrap-reverse h-[100vh] font-koodak font-mono">
           
             <Routes>
-              <Route path="/register" element={<Register/>} />  
+              <Route path="/register" element={<Register/>} /> 
+              <Route path="/login" element={<Login/>} />  
              {
               auth ? (
                <>
@@ -119,7 +119,6 @@ function App() {
           <div className=" md:h-[calc(100vh-110px)] flex ">
             <Settings />
             <div className="hidden md:flex flex-col overflow-auto w-full max-w-[60vw] ">
-              {/* <Wellcom/> */}
               <Home/>
               <Report/>
               <Groups />
@@ -160,7 +159,6 @@ function App() {
             <Footer/>
           </div>
         </div>
-      
     </Router>
     </authContext.Provider>
   );

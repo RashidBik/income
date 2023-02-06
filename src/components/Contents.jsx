@@ -1,10 +1,7 @@
-import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router'
-import Header from '../components/Header';
-import { useEffect } from 'react'
-import { useContext } from 'react';
+import { useEffect ,useContext, useState} from 'react'
 import authContext from '../helper/AuthContext';
-import { Link } from 'react-router-dom';
+import Back from './Back';
 
 function Contents() {
   const [error, setError] = useState(null);
@@ -26,11 +23,7 @@ function Contents() {
   return (
     <div>
        <header style={color.C1} className='flex justify-end p-4'> 
-        <Link to="/group" className='px-2 font-bold'>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
-          </svg>
-        </Link>
+        <Back />
       </header>
       <div style={color.C2} className='py-1 text-center text-xl uppercase'>
       {data.groups && data.groups[0].group}
