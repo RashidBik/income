@@ -1,3 +1,4 @@
+import axios from 'axios';
 import {useContext, useState, useEffect} from 'react'
 import { useLocation, useNavigate } from 'react-router'
 import authContext from '../helper/AuthContext';
@@ -8,16 +9,23 @@ const Card = (props) => {
   const [error, setError] = useState(null);
   const [data, setData] = useState([]);
   const navigate = useNavigate();
-  const {admin ,color} = useContext(authContext);
-  const userid = localStorage.getItem('userid');
+  const {auth ,color} = useContext(authContext);
+  const accessToken = localStorage.getItem('accessToken');
 
     useEffect(() => {
-      fetch(`${process.env.REACT_APP_API_URL}/api/user/content/${userid}/${location.state}`)
-      .then((res)=> res.json())
+      axios({
+        url: `${process.env.REACT_APP_API_URL}/api/user/content/${location.state}`,
+        headers: {"accesstoken": accessToken}
+      })
+      .then((res)=> res.data)
       .then(data => {
+        console.log(data);
         setData(data.content)
       })
-      .catch(err => setError(err));
+      .catch(err => {
+        console.log(err);
+        setError(err)
+      });
     }, []);
 
   return (
@@ -44,7 +52,7 @@ const Card = (props) => {
             </div>
         </div>
         <div className='grid p-4'>
-          <button style={color.C1} onClick={()=> admin ? navigate('/update',{state: data._id}): navigate('/login')} className='p-1 py-2 rounded-xl'>update</button>
+          <button style={color.C1} onClick={()=> auth ? navigate('/update',{state: data._id}): navigate('/login')} className='p-1 py-2 rounded-xl'>update</button>
         </div>
       </div>
       </>

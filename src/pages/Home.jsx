@@ -6,22 +6,25 @@ import Header from "../components/Header";
 import { useContext } from "react";
 import authContext from "../helper/AuthContext";
 import NewInser from "../components/NewInser";
+import axios from "axios";
 
 
 export default function Home() {
   ChartJS.register(ArcElement, Tooltip, Legend);
-  const userid = localStorage.getItem('userid');
-  const [assets, setAssets] = useState({});
+  const accesstoken = localStorage.getItem('accesstoken');
   const [error, setError] = useState(null);
   const [chartData, setChartData] = useState();
   const [loading, setLoading] = useState(true); 
   const {lang, color} = useContext(authContext);
   
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/api/user/content/${userid}`)
-    .then((res)=> res.json())
+    axios({
+      method: 'get',
+      url: `${process.env.REACT_APP_API_URL}/api/user/content`,
+      headers: {"accesstoken": accesstoken}
+    })
+    .then((res)=> res.data)
     .then(({content, assets}) => {
-      setAssets(assets)
       setChartData({
         labels: ['income', 'expens'], 
         datasets: [{data: [assets.income, assets.expens],

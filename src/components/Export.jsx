@@ -23,7 +23,6 @@ const Export = () => {
         .then(result => setData(result.content))
         .catch(err => setError(err))
     }, []);
-console.log(data);
 // const arr = [
 //     {
 //         id: data.user.contents._id,

@@ -17,9 +17,7 @@ function InsertData() {
   const [toggleOpt, setToggleOpt] = useState(false);
   const [visible, setVisible] = useState(false);
 
-  const userid = localStorage.getItem('userid')
   const deal = dealCheck ?'cash':'credit';
-  // const data = 
   const navigate = useNavigate();
   const {color} = useContext(authContext);
 
@@ -35,7 +33,6 @@ const accessToken = localStorage.getItem('accessToken');
         })
         .then(res => res.data)
         .then(result => {
-          console.log(result);
           navigate('/report');
         })
         .catch(err => {

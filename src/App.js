@@ -26,7 +26,6 @@ import {Farsi} from './languages/Farsi';
 import {En} from './languages/En';
 import Lang from "./components/Lang";
 import About from "./setting/About";
-import Pages from "./pages/Pages";
 import Header from "./components/Header";
 
 const colorA = {
@@ -38,32 +37,24 @@ const colorA = {
 }
 
 function App() {
-  const [auth, setAuth] = useState(false);
-  const [admin, setAdmin] = useState(false);
+  const [auth, setAuth] = useState(true);
   const [lang, setLang] = useState(En);
   const [color, setColor] = useState(colorA);
+
   useEffect(() => {
-    const userid = localStorage.getItem('userid');
-    if (userid) {
+    const accessToken = localStorage.getItem('accessToken');
+    if (accessToken) {
       setAuth(true)
     } else {
       setAuth(false)
-    }
-    const accessToken = localStorage.getItem('accessToken');
-    if (accessToken) {
-      setAdmin(true)
-    } else {
-      setAdmin(false)
     }
   }, []);
   
   return (
     <authContext.Provider 
-    value={{
-      setAdmin, 
+    value={{ 
       setAuth, 
-      auth, 
-      admin, 
+      auth,  
       lang, 
       setLang, 
       color, 
@@ -76,43 +67,34 @@ function App() {
         className="relative md:hidden flex flex-col md:flex-wrap-reverse h-[100vh] font-koodak font-mono">
           
             <Routes>
-              <Route path="/register" element={<Register/>} /> 
-              <Route path="/login" element={<Login/>} />  
              {
-              auth ? (
+              !auth ? (
                <>
-                <Route path="/" element={<Wellcom/>}/>
-                <Route path="/home" element={<Home/>} />
-                <Route path="/about" element={<About/>} />
-                <Route path="/setting" element={<Settings />} />
-                <Route path="/report" element={<Report/>} />
-                <Route path="/group" element={<Groups />} />
-                <Route path="/insertData" element={<InsertData /> } />
-                <Route path="/theme" element={<Theme />} />
-                <Route path="/card" element={<Card />} />              
-                <Route path="/contents" element={<Contents/>} />   
-                <Route path="/lang" element={<Lang/> } />   
-                  {
-                    admin ? (
-                    <>
-                      <Route path="/update" element={<Update/>} /> 
-                      <Route path="/profile" element={<Profile />} />
-                      <Route path="/account" element={<Account />} />
-                    </>
-                    ):(
-                      <>
-                      <Route path="/login" element={<Login/>} />          
-                    </>
-                    )
-                  }
+                  <Route path="/" element={<Wellcom/>}/>
+                  <Route path="/register" element={<Register/>} /> 
+                  <Route path="/login" element={<Login/>} />  
                </>
               ): (
-                <Route path="/" element={<Wellcom/>}/>
+                <>
+                  <Route path="/home" element={<Home/>} />
+                  <Route path="/about" element={<About/>} />
+                  <Route path="/setting" element={<Settings />} />
+                  <Route path="/report" element={<Report/>} />
+                  <Route path="/group" element={<Groups />} />
+                  <Route path="/insertData" element={<InsertData /> } />
+                  <Route path="/theme" element={<Theme />} />
+                  <Route path="/card" element={<Card />} />              
+                  <Route path="/contents" element={<Contents/>} />   
+                  <Route path="/lang" element={<Lang/> } />   
+                  <Route path="/update" element={<Update/>} /> 
+                  <Route path="/profile" element={<Profile />} />
+                  <Route path="/account" element={<Account />} />
+                </>
               )
              }         
             </Routes>
          {
-           (auth || admin) &&  <div className="md:hidden"><Footer/></div> 
+           auth &&  <div className="md:hidden"><Footer/></div> 
           }
       </div>
         <div className="hidden md:flex md:flex-col">
@@ -134,24 +116,17 @@ function App() {
                 <Route path="/card" element={<Card />} />              
                 <Route path="/contents" element={<Contents/>} />   
                 <Route path="/lang" element={<Lang/> } />   
-                  {
-                    admin ? (
-                    <>
-                      <Route path="/update" element={<Update/>} /> 
-                      <Route path="/profile" element={<Profile />} />
-                      <Route path="/account" element={<Account />} />
-                    </>
-                    ):(
-                      <>
-                      <Route path="/login" element={<Login/>} />          
-                    </>
-                    )
-                  }
-               </>
-              ): (
+                <Route path="/update" element={<Update/>} /> 
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/account" element={<Account />} />
+              </>
+              ):(
+                <>
+                <Route path="/login" element={<Login/>} />          
                 <Route path="/" element={<Wellcom/>}/>
+              </>
               )
-             }         
+            }        
             </Routes>
               </div>
           </div>

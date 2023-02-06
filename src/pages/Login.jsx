@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useContext, useState, useEffect } from 'react'
+import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router';
 import Back from '../components/Back';
 import authContext from '../helper/AuthContext';
@@ -8,26 +8,28 @@ const Login = () => {
   const [error, setError] = useState(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const {setAdmin, color, lang} = useContext(authContext);
+  const {setAuth, color, lang} = useContext(authContext);
 
   const navigate = useNavigate()
    
   const handleSubmit = (e) => {
     e.preventDefault();
-  axios({
-    method: 'post',
-    url: `${process.env.REACT_APP_API_URL}/api/user/login/`,
-    data: {email, password}
-  })
+    axios({
+      method: 'post',
+      url: `${process.env.REACT_APP_API_URL}/api/user/login/`,
+      data: {email, password}
+    })
     .then(res => res.data)
     .then(data => {
       localStorage.setItem('accessToken', data.token)
-      setAdmin(true)
+      setAuth(true)
       navigate('/home')
+      console.log(data);
     })
     .catch(err => {
       setError(err)
       navigate('/')
+      console.log(err);
     });    
 
   }

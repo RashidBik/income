@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from 'react-router'
 import { useEffect ,useContext, useState} from 'react'
 import authContext from '../helper/AuthContext';
 import Back from './Back';
+import axios from 'axios';
 
 function Contents() {
   const [error, setError] = useState(null);
@@ -9,11 +10,13 @@ function Contents() {
   const navigate = useNavigate();
   const location = useLocation()
   const {color} = useContext(authContext);
-  const userid = localStorage.getItem('userid');
-
-    useEffect(() => {
-      fetch(`${process.env.REACT_APP_API_URL}/api/user/content/${userid}/group/${location.state}`)
-      .then((res)=> res.json())
+  const accessToken = localStorage.getItem('accessToken')
+  useEffect(() => {
+      axios({
+        url: `${process.env.REACT_APP_API_URL}/api/user/content/group/${location.state}`,
+        headers: {"accesstoken": accessToken}
+      })
+      .then((res)=> res.data)
       .then(data => {
         setData(data)
       })
@@ -41,7 +44,7 @@ function Contents() {
                       </div>
                   </div>
               ))}
-        </div>
+        </div>        
     </div>
   )
 }

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import {useEffect ,useState,useContext } from 'react';
 import { useNavigate } from 'react-router';
 import Header from '../components/Header';
@@ -8,12 +9,15 @@ function Groups() {
   const [error, setError] = useState(null);
   const [group, setGroup] = useState();
   const navigate = useNavigate();
-  const userid = localStorage.getItem('userid');
+  const accessToken = localStorage.getItem('accessToken');
 const {lang, color} = useContext(authContext);
 
     useEffect(() => {
-      fetch(`${process.env.REACT_APP_API_URL}/api/user/content/${userid}`)
-      .then((res)=> res.json())
+      axios({
+        url: `${process.env.REACT_APP_API_URL}/api/user/content`,
+        headers: {"accesstoken": accessToken}
+      })
+      .then((res)=> res.data)
       .then(data => {
        let groups = data.content.map(group => group.group)
       setGroup(groups)

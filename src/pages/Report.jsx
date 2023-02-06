@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router'
 import Header from '../components/Header';
@@ -11,16 +12,22 @@ function Report() {
   const [contents, setContents] = useState([]);
   const navigate = useNavigate();
   const {lang, color} = useContext(authContext)
-  const userid = localStorage.getItem('userid');
+  const accessToken = localStorage.getItem('accessToken');
 
     useEffect(() => {
-      fetch(`${process.env.REACT_APP_API_URL}/api/user/content/${userid}`)
-      .then((res)=> res.json())
+      axios({
+        method: 'get',
+        url: `${process.env.REACT_APP_API_URL}/api/user/content/`,
+        headers: {'accesstoken': accessToken }
+      })
+      .then((res)=> res.data)
       .then(data => {
         setData(data)
         setContents(data.content)
       })
-      .catch(err => setError(err));
+      .catch(err => {       
+        setError(err)
+      });
     }, []);
 
     const searchData = (keyword)=>{

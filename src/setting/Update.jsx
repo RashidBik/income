@@ -1,3 +1,4 @@
+import axios from 'axios';
 import {useState, useEffect, useContext} from 'react'
 import { useLocation, useNavigate } from 'react-router'
 import { Link } from 'react-router-dom';
@@ -6,7 +7,6 @@ import authContext from '../helper/AuthContext';
 
 const Update = (props) => {
   const location = useLocation();
-  const [id, setId] = useState(0);
   const [amount, setAmount] = useState('');
   const [type, setType] = useState('');
   const [deal, setDeal] = useState('');
@@ -17,13 +17,15 @@ const Update = (props) => {
   const {color} = useContext(authContext);
   const navigate = useNavigate();
   
-  const userid = localStorage.getItem("userid");
+  const accessToken = localStorage.getItem("accessToken");
 
     useEffect(() => {
-      fetch(`${process.env.REACT_APP_API_URL}/api/user/content/${userid}/${location.state}`)
-      .then((res)=> res.json())
+      axios({
+        url: `${process.env.REACT_APP_API_URL}/api/user/content/${location.state}`,
+        headers: {"accesstoken": accessToken}
+      })
+      .then((res)=> res.data)
       .then(data => {
-        setId(data.content._id)
         setAmount(data.content.amount)
         setType(data.content.type)
         setDeal(data.content.deal)
@@ -36,27 +38,27 @@ const Update = (props) => {
 
     const handleSubmit = async(e) => {
       e.preventDefault()
-      const updatedData = {type, amount, deal, group, report, date };
-
-      fetch(`${process.env.REACT_APP_API_URL}/api/user/content/${userid}/${id}`,{
-        method: "PUT",
-        body: JSON.stringify(updatedData),
-        headers: {
-          "Content-Type": "application/json"
-        } 
+      axios({
+        method: "put",
+        url: `${process.env.REACT_APP_API_URL}/api/user/content/${location.state}`,
+        data: {type, amount, deal, group, report, date },
+        headers: { "accesstoken": accessToken } 
       })
-      .then(res => res.json()
+      .then(res => res.data)
       .then(result => {
-        console.log(result)
+        console.log(result);
         navigate("/account")
-      }))
-      .catch(err => console.log(err))
-    }
+      })
+      .catch(err => {
+        setError(err)
+        console.log(err);
+      } 
+      )}
   return ( 
     <div className='grid'>
-          <header style={color.C1} className='flex justify-end p-4'> 
-          <Back />
-        </header>
+      <header style={color.C1} className='flex justify-end p-4'> 
+        <Back />
+      </header>
       <form onSubmit={handleSubmit}>
         <div style={color.C4} className='grid'>
             <div className='p-2 m-1 bg-slate-300 '>

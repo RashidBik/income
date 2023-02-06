@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useState,useContext } from "react";
 import { Link } from "react-router-dom";
 import Back from "../components/Back";
@@ -11,10 +12,13 @@ const Profile = () => {
   const [err, setErr] = useState(null);
   const {color} = useContext(authContext);
 
-  const userid = localStorage.getItem('userid')
+  const accessToken = localStorage.getItem('accessToken')
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/api/user/${userid}`)
+    axios({
+      url: `${process.env.REACT_APP_API_URL}/api/user`,
+      headers: {"accesstoken": accessToken}
+    })
     .then(res => res.json())
     .then(result => {
       setName(result.user.name)
@@ -28,18 +32,22 @@ const Profile = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const data = {name, job, email, password}
-    fetch(`${process.env.REACT_APP_API_URL}/api/user/${userid}`,{
-      method: "PUT",
-      body: JSON.stringify(data),
+  
+    axios({
+      method: "put",
+      url:`${process.env.REACT_APP_API_URL}/api/user`,
+      data: {name, job, email, password},
       headers: {
-        "Content-Type": "application/json",
-        accessToken: localStorage.getItem('accessToken')
+        "accesstoken": accessToken
       }
     })
     .then(res => res.json())
-    .then(msg => console.log(msg))
-    .catch(err => console.log(err))
+    .then(msg => {
+
+    })
+    .catch(err => {
+      setErr(err)
+    })
   }
 
   return (

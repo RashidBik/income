@@ -24,7 +24,7 @@ const guestDB = {
     ],
     assets: () => {
         // this.contents.amount
-        console.log('dddd'); 
+        ('dddd'); 
     }
 
 }
