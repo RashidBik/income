@@ -14,7 +14,7 @@ const {lang, color} = useContext(authContext);
 
     useEffect(() => {
       axios({
-        url: `${process.env.REACT_APP_API_URL}/api/user/content`,
+        url: `${process.env.REACT_APP_API_URL}/api/content`,
         headers: {"accesstoken": accessToken}
       })
       .then((res)=> res.data)

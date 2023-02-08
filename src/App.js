@@ -37,7 +37,7 @@ const colorA = {
 }
 
 function App() {
-  const [auth, setAuth] = useState(true);
+  const [auth, setAuth] = useState(false);
   const [lang, setLang] = useState(En);
   const [color, setColor] = useState(colorA);
 
@@ -64,15 +64,14 @@ function App() {
         <Header />
       </div>
       <div style={color.C4} 
-        className="relative md:hidden flex flex-col md:flex-wrap-reverse h-[100vh] font-koodak font-mono">
-          
+        className="relative md:max-w-md flex flex-col md:flex-wrap-reverse h-[100vh] font-koodak font-mono">
             <Routes>
              {
               !auth ? (
                <>
                   <Route path="/" element={<Wellcom/>}/>
                   <Route path="/register" element={<Register/>} /> 
-                  <Route path="/login" element={<Login/>} />  
+                  <Route path="/login" exact element={<Login/>} />  
                </>
               ): (
                 <>
@@ -94,46 +93,9 @@ function App() {
              }         
             </Routes>
          {
-           auth &&  <div className="md:hidden"><Footer/></div> 
+           auth ?  <div className="md:hidden"><Footer/></div>: ''
           }
       </div>
-        <div className="hidden md:flex md:flex-col">
-          <div className=" md:h-[calc(100vh-110px)] flex ">
-            <Settings />
-            <div className="hidden md:flex flex-col overflow-auto w-full max-w-[60vw] ">
-              <Home/>
-              <Report/>
-              <Groups />
-              <About/>
-            </div>
-              <div className=" md:w-full overflow-auto">
-              <Routes>
-             {
-              auth ? (
-               <>
-                <Route path="/insertData" element={<InsertData /> } />
-                <Route path="/theme" element={<Theme />} />
-                <Route path="/card" element={<Card />} />              
-                <Route path="/contents" element={<Contents/>} />   
-                <Route path="/lang" element={<Lang/> } />   
-                <Route path="/update" element={<Update/>} /> 
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/account" element={<Account />} />
-              </>
-              ):(
-                <>
-                <Route path="/login" element={<Login/>} />          
-                <Route path="/" element={<Wellcom/>}/>
-              </>
-              )
-            }        
-            </Routes>
-              </div>
-          </div>
-          <div>
-            <Footer/>
-          </div>
-        </div>
     </Router>
     </authContext.Provider>
   );

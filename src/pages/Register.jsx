@@ -11,22 +11,21 @@ const Register = () => {
     const [job, setJob] = useState('');
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const {setAuth, lang, color} = useContext(authContext);
+    const {lang, color} = useContext(authContext);
     const navigate = useNavigate();
-    const data = {name, job, email, password};
     
     const handleSubmit = (e) => {
         e.preventDefault()
-       axios.post(`${process.env.REACT_APP_API_URL}/api/user`,data)
-        .then(response => response.data)
-        .then(data => {
-              setAuth(true);
-              navigate('/login');
+       axios({
+          method: "post",
+          url: `${process.env.REACT_APP_API_URL}/api/user/register`,  
+          data: {name, job, email, password}   
+       })
+        .then(() => {
+          navigate('/login');
         })
         .catch(err => {
-            setAuth(false);
             setError(err)
-
         })
     }
 
@@ -59,7 +58,6 @@ const Register = () => {
         <div className='relative px-5 mt-8 text-center font-bold  border rounded-xl'>
             <input className='px-3 py-2 rounded-xl visited:bg-orange-500 text-green-300' type="submit" value={lang.register[5]}/>
         </div>
-        <div>{error}</div>
         </form>
       </div>
     </div>

@@ -20,7 +20,7 @@ export default function Home() {
   useEffect(() => {
     axios({
       method: 'get',
-      url: `${process.env.REACT_APP_API_URL}/api/user/content`,
+      url: `${process.env.REACT_APP_API_URL}/api/content`,
       headers: {"accesstoken": accesstoken}
     })
     .then((res)=> res.data)

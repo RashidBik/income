@@ -13,7 +13,7 @@ function Contents() {
   const accessToken = localStorage.getItem('accessToken')
   useEffect(() => {
       axios({
-        url: `${process.env.REACT_APP_API_URL}/api/user/content/group/${location.state}`,
+        url: `${process.env.REACT_APP_API_URL}/api/content/group/${location.state}`,
         headers: {"accesstoken": accessToken}
       })
       .then((res)=> res.data)

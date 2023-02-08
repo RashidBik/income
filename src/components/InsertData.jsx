@@ -27,7 +27,7 @@ const accessToken = localStorage.getItem('accessToken');
      
       axios({
             method: "post",
-            url: `${process.env.REACT_APP_API_URL}/api/user/content`,
+            url: `${process.env.REACT_APP_API_URL}/api/content`,
             data: {type, amount, deal, group: selectOpt, report, date},
             headers: {'accesstoken': accessToken }
         })

@@ -16,7 +16,7 @@ const Login = () => {
     e.preventDefault();
     axios({
       method: 'post',
-      url: `${process.env.REACT_APP_API_URL}/api/user/login/`,
+      url: `${process.env.REACT_APP_API_URL}/api/user/login`,
       data: {email, password}
     })
     .then(res => res.data)
@@ -48,7 +48,6 @@ const Login = () => {
                value={password} onChange={(e)=> setPassword(e.target.value)} />
         <input className='border mt-4 px-3 py-2 rounded-xl text-green-300' type="submit" value={lang.login[0]} /> 
        </form>
-       <div>{error}</div>
     </div>
     </>
   )

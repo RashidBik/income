@@ -40,7 +40,7 @@ const Update = (props) => {
       e.preventDefault()
       axios({
         method: "put",
-        url: `${process.env.REACT_APP_API_URL}/api/user/content/${location.state}`,
+        url: `${process.env.REACT_APP_API_URL}/api/content/${location.state}`,
         data: {type, amount, deal, group, report, date },
         headers: { "accesstoken": accessToken } 
       })
